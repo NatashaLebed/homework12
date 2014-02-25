@@ -1,6 +1,6 @@
 lebed_guestbook_homepage:
     pattern:  /{_locale}
-    defaults: { _controller: LebedGuestbookBundle:Default:index }
+    defaults: { _controller: LebedGuestbookBundle:Post:index }
     requirements:
         _locale: en|ru
 lebed_guestbook_about:
@@ -12,13 +12,13 @@ lebed_guestbook_about:
         sharedMaxAge: 86400
 lebed_guestbook_viewPost:
     pattern: /post/{slug}
-    defaults: {_controller: LebedGuestbookBundle:Default:show }
+    defaults: {_controller: LebedGuestbookBundle:Post:show }
 lebed_guestbook_viewMessages:
     pattern: /viewMessages
-    defaults: { _controller: LebedGuestbookBundle:Default:viewMessages }
+    defaults: { _controller: LebedGuestbookBundle:Message:viewMessages }
 lebed_guestbook_search:
     pattern: /search
-    defaults: { _controller: LebedGuestbookBundle:Default:search}
+    defaults: { _controller: LebedGuestbookBundle:Searcher:search}
 lebed_guestbook_viewPostsOfCategory:
     pattern: /category/{id}
-    defaults: { _controller: LebedGuestbookBundle:Default:viewPostsOfCategory}
+    defaults: { _controller: LebedGuestbookBundle:Post:viewPostsOfCategory}
