@@ -14,8 +14,16 @@ class PostRepository extends EntityRepository
 {
     public function findCountPostsByIdCategory($id)
     {
-        return $this->getEntityManager()->createQuery("SELECT COUNT(p.id) FROM LebedGuestbookBundle:Post p WHERE p.category = $id")
+        return $this->getEntityManager()
+            ->createQuery("SELECT COUNT(p.id) FROM LebedGuestbookBundle:Post p WHERE p.category = $id")
             ->getResult();
+    }
 
+    public function findLatestPostsLimit($limit)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT p FROM LebedGuestbookBundle:Post p ORDER BY p.id DESC')
+            ->setMaxResults($limit)
+            ->getResult();
     }
 }

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Lebed\GuestbookBundle\Entity\Message;
+use Lebed\GuestbookBundle\Entity\PostRepository;
 use Lebed\GuestbookBundle\Form\Type\MessageType;
 
 class DefaultController extends Controller
@@ -22,11 +23,10 @@ class DefaultController extends Controller
             );
 
         }
-//        $translated = $this->get('translator')->trans('Symfony2 is great');
-//
-//        return new Response($translated);
+
         return $this->render('LebedGuestbookBundle:Default:index.html.twig', array('posts'=>$posts));
     }
+
 
     public function showAction($slug)
     {
@@ -116,5 +116,13 @@ class DefaultController extends Controller
         }
 
         return $this->render('LebedGuestbookBundle:Default:index.html.twig', array('posts'=>$posts));
+    }
+
+    public function lastPostsAction($limit = 3)
+    {
+        $repository = $this->getDoctrine()->getRepository('LebedGuestbookBundle:Post');
+        $posts = $repository->findLatestPostsLimit($limit);
+
+        return $this->render('LebedGuestbookBundle::lastPosts.html.twig', array('posts' => $posts));
     }
 }
