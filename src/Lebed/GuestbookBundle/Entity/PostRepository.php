@@ -19,10 +19,18 @@ class PostRepository extends EntityRepository
             ->getResult();
     }
 
-    public function findLatestPostsLimit($limit)
+    public function findLatestPostsLimit($last_posts_limit)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT p FROM LebedGuestbookBundle:Post p ORDER BY p.id DESC')
+            ->setMaxResults($last_posts_limit)
+            ->getResult();
+    }
+
+    public function findMostViewedtPosts($limit)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT p FROM LebedGuestbookBundle:Post p ORDER BY p.viewsNumber DESC')
             ->setMaxResults($limit)
             ->getResult();
     }

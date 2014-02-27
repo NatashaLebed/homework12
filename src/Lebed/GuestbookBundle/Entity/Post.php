@@ -9,7 +9,6 @@ use Gedmo\Loggable\Entity\MappedSuperclass;
 /**
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="Lebed\GuestbookBundle\Entity\PostRepository")
- * @Gedmo\Loggable
  */
 class Post
 {
@@ -22,7 +21,6 @@ class Post
 
     /**
      * @ORM\Column(length=64)
-     * @Gedmo\Versioned
      */
     protected $title;
 
@@ -51,6 +49,12 @@ class Post
      * @Gedmo\Timestampable(on="update")
      */
     protected $updatedAt;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="viewsNumber", type = "integer" )
+     */
+    protected $viewsNumber;
 
     /** @ORM\Column(type="text")
      */
@@ -180,6 +184,29 @@ class Post
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set viewsNumber
+     *
+     * @param integer $viewsNumber
+     * @return Post
+     */
+    public function setViewsNumber($viewsNumber)
+    {
+        $this->viewsNumber = $viewsNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get viewsNumber
+     *
+     * @return integer
+     */
+    public function getViewsNumber()
+    {
+        return $this->viewsNumber;
     }
 
     /**
