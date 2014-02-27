@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\DemoBundle\Tests\Utility;
+namespace Lebed\GuestbookBundle\Tests\Utility;
 
 use Lebed\GuestbookBundle\Entity\Post;
 
