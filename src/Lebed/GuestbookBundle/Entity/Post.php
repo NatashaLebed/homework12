@@ -44,6 +44,13 @@ class Post
      * @Gedmo\Timestampable(on="create")
      */
     protected $createdAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="posts")
+     * @ORM\JoinTable(name="posts_tags")
+     */
+    protected $tags;
+
     /**
      * @Doctrine\ORM\Mapping\Column(type="datetime", name="updated_at")
      * @Gedmo\Timestampable(on="update")
@@ -253,5 +260,45 @@ class Post
     public function getCategory()
     {
         return $this->category;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Lebed\GuestbookBundle\Entity\Tag $tags
+     * @return Post
+     */
+    public function addTag(\Lebed\GuestbookBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Lebed\GuestbookBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Lebed\GuestbookBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

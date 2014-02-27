@@ -9,8 +9,21 @@
                 <h2>{{ post.Title }}</h2>
                 <p class="blog-post-meta">{{ post.UpdatedAt|date("m/d/Y") }} by <a href="#">{{ post.Author }}</a></p>
 
+                <p class="blog-post-meta">
+                    Category: <a href="{{ path('lebed_guestbook_viewPostsOfCategory', {'id': post.getCategory().getId }) }}"> {{ post.getCategory().getTitle }}</a>
+                </p>
+
+                <p class="blog-post-meta">
+                   Tags:
+                   {% for tag in post.getTags() %}
+                       {{ tag.getTitle }}
+                   {% endfor %}
+                </p> <p></p>
+
                 {% set link='/post/' ~ post.Slug %}
                 <h5> {{ post.Text|ReadMore(link = link) }}</h5>
+
+
 
             </div><!--/span-->
 

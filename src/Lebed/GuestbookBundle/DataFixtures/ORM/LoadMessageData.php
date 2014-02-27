@@ -12,7 +12,7 @@ class LoadMessageData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         date_default_timezone_set('Europe/Kiev');
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 6; $i++) {
             $message = new Message();
 
             $message->setAuthor('Vasya');
@@ -23,11 +23,10 @@ class LoadMessageData extends AbstractFixture implements OrderedFixtureInterface
             $manager->flush($message);
         }
 
-
     }
 
     public function getOrder()
     {
-        return 3; // the order in which fixtures will be loaded
+        return 4; // the order in which fixtures will be loaded
     }
 }
