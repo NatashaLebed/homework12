@@ -4,7 +4,7 @@ namespace Lebed\GuestbookBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class PostController extends Controller
+class DefaultController extends Controller
 {
     public function indexAction()
     {
