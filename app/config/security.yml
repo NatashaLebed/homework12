@@ -9,6 +9,9 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+        my_custom_hwi_provider:
+            id: lebed_oauth_user_provider
+
 
     firewalls:
         main:
@@ -18,9 +21,25 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            oauth:
+                resource_owners:
+                    vkontakte:           "/login/check-vkontakte"
+                login_path:        /login
+                use_forward:       false
+                failure_path:      /login
+                oauth_user_provider:
+                    service: lebed_oauth_user_provider
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+
+hwi_oauth:
+    resource_owners:
+        vkontakte:
+            type:                vkontakte
+            client_id:           4240486
+            client_secret:       rrYoWQf1WpMpqsaX2t4o
+    firewall_name: main
